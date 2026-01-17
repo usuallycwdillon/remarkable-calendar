@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  calendar:
+    build: .
+    image: remarkable-calendar
+    container_name: remarkable-calendar
+    network_mode: host
+    env_file:
+      - .env
+    volumes:
+      - ./planner_2026:/app/planner_2026
+      - ./credentials.json:/app/credentials.json:ro
+      - ./token.json:/app/token.json
+    command: ["2026"]

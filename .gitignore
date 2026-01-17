@@ -1,0 +1,12 @@
+# env, etc
+__pycache__/
+.venv/
+
+# outputs
+planner_*/
+*.pdf
+
+# secrets
+credentials.json
+token.json 
+.env
