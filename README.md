@@ -236,7 +236,7 @@ tail -f /var/log/remarkable-sync.log
 ```
 
 ## Project Structure
-
+```plaintext
 remarkable-calendar/
 ├── cal_generator.py       # Main planner generation logic
 ├── pages.py               # Page layout definitions
@@ -250,6 +250,8 @@ remarkable-calendar/
 ├── docker-compose.yml     # Docker orchestration
 ├── .env                   # Environment variables (create this)
 └── .gitignore             # Git ignore rules
+```
+
 
 ## Customization
 I've tried to make this easy to modify because I haven't really figured out for myself how this should look. (This would be a great place to contribution if you have design skills or a reasonable sense of asthetics. I obviously do not.)
