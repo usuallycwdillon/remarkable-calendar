@@ -1,5 +1,7 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 import calendar
 from datetime import date, timedelta
 import os
@@ -16,7 +18,7 @@ def generate_monthly_planner(year, month, output_dir, data_processor):
     filename = f"{year}_{month:02d}_{month_name}.pdf"
     filepath = os.path.join(output_dir, filename)
     
-    c = canvas.Canvas(filepath, pagesize=letter)
+    c = canvas.Canvas(filepath, pagesize=letter, embedFonts=True)
     
     pages = []
     

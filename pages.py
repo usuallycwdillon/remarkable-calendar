@@ -10,7 +10,7 @@ MARGIN = 0.5 * inch
 COLOR_GRID = HexColor('#E0E0E0')
 COLOR_TEXT = HexColor('#000000')
 COLOR_LINK = HexColor('#0066CC')
-COLOR_EVENT = HexColor('#4A90E2')
+COLOR_EVENT = HexColor('#2C5F8D')
 COLOR_WEEKEND = HexColor('#F5F5F5')
 
 FONT_HEADER = 'Courier-Bold'
@@ -50,7 +50,7 @@ class YearlyOverviewPage(PlannerPage):
     def render(self, c):
         c.bookmarkPage(self.bookmark_name)
         
-        c.setFont(FONT_HEADER, 14)
+        c.setFont(FONT_HEADER, 16)
         c.drawString(MARGIN, PAGE_HEIGHT - 0.5*inch, f"{self.year} Overview (Page {self.page_num}/4)")
         
         month_names = ["January", "February", "March", "April", "May", "June",
@@ -69,7 +69,7 @@ class YearlyOverviewPage(PlannerPage):
         num_rows = 37
         row_height = grid_height / (num_rows + 1)
         
-        c.setFont(FONT_HEADER, 9)
+        c.setFont(FONT_HEADER, 11)
         for i in range(num_months):
             month_idx = self.start_month + i - 1
             if month_idx >= 12:
@@ -92,7 +92,7 @@ class YearlyOverviewPage(PlannerPage):
             x_pos = grid_x + i * month_width
             c.line(x_pos, grid_y, x_pos, grid_y + grid_height)
         
-        c.setFont(FONT_SMALL, 9)
+        c.setFont(FONT_SMALL, 10)
         for i in range(num_rows):
             dow_label = day_labels[i % 7]
             label_y = grid_y + grid_height - (i + 0.5) * row_height - 0.05*inch
@@ -117,7 +117,7 @@ class YearlyOverviewPage(PlannerPage):
         first_day = date(year, month, 1)
         num_days = calendar.monthrange(year, month)[1]
 
-        c.setFont(FONT_SMALL, 8)
+        c.setFont(FONT_SMALL, 10)
 
         for day in range(1, num_days + 1):
             current_date = date(year, month, day)
@@ -139,24 +139,24 @@ class YearlyOverviewPage(PlannerPage):
             c.drawString(x + 0.02*inch, cell_y - row_height/2 - 0.05*inch, day_str)
 
             if self.current_month == month:
-                day_width = c.stringWidth(day_str, FONT_SMALL, 8)
+                day_width = c.stringWidth(day_str, FONT_SMALL, 10)
                 self.add_link(x + 0.02*inch, cell_y - row_height/2 - 0.1*inch,
                              x + 0.02*inch + day_width + 0.05*inch, cell_y - row_height/2 + 0.1*inch,
                              f'day_{year}_{month:02d}_{day:02d}_schedule')
             
             items_for_day = [item for item in self.yearly_items if item['date'] == current_date]
             if items_for_day:
-                c.setFont(FONT_SMALL, 7)
+                c.setFont(FONT_SMALL, 9)
                 c.setFillColor(COLOR_EVENT)
                 event_text = items_for_day[0]['text']
-                if len(event_text) > 12:
-                    event_text = event_text[:10] + ".."
+                if len(event_text) > 20:
+                    event_text = event_text[:19] + ".."
                 c.drawString(x + date_width + 0.02*inch, cell_y - row_height/2 - 0.05*inch, event_text)
                 c.setFont(FONT_SMALL, 8)
 
             if weekday == 0:
                 week_num = current_date.isocalendar()[1]
-                c.setFont(FONT_SMALL, 7)
+                c.setFont(FONT_SMALL, 9)
                 c.setFillColor(COLOR_TEXT)
                 c.drawRightString(x + date_width + event_width - 0.02*inch, cell_y - row_height/2 - 0.05*inch,
                            f"({week_num})")
@@ -189,7 +189,7 @@ class MonthlyOverviewPage(PlannerPage):
         num_weeks = len(cal)
         row_height = grid_height / (num_weeks + 1)
         
-        c.setFont(FONT_HEADER, 10)
+        c.setFont(FONT_HEADER, 12)
         header_y = grid_y + grid_height + 0.1*inch
         day_names = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         for i, day_name in enumerate(day_names):
@@ -221,7 +221,7 @@ class MonthlyOverviewPage(PlannerPage):
                 week_y = grid_y + grid_height - week_idx * row_height - 0.25*inch
                 
                 c.setFillColor(COLOR_LINK)
-                c.setFont(FONT_SMALL, 9)
+                c.setFont(FONT_SMALL, 10)
                 c.drawString(MARGIN + 0.05*inch, week_y, f"({week_num})")
                 
                 self.add_link(MARGIN, week_y - 0.05*inch, MARGIN + 0.35*inch, week_y + 0.15*inch,
@@ -257,12 +257,12 @@ class WeeklyPage(PlannerPage):
         
         week_end = self.week_start_date + timedelta(days=6)
         
-        c.setFont(FONT_HEADER, 14)
+        c.setFont(FONT_HEADER, 16)
         header_text = f"Week ({self.week_num}), {self.week_start_date.strftime('%b %d')} -> {week_end.strftime('%b %d, %Y')}"
         c.drawString(MARGIN, PAGE_HEIGHT - 0.6*inch, header_text)
         
         c.setFillColor(COLOR_LINK)
-        c.setFont(FONT_SMALL, 9)
+        c.setFont(FONT_SMALL, 12)
         link_x = PAGE_WIDTH - MARGIN - 1*inch
         c.drawString(link_x, PAGE_HEIGHT - 0.6*inch, "-> Notes")
         self.add_link(link_x, PAGE_HEIGHT - 0.7*inch, link_x + 0.6*inch, PAGE_HEIGHT - 0.5*inch, 'notes')
@@ -274,14 +274,14 @@ class WeeklyPage(PlannerPage):
                         grid_height, self.week_start_date)
     
     def _draw_weekly_grid(self, c, x, y, width, height, week_start):
-        time_col_width = 0.55*inch
+        time_col_width = 0.65*inch
         day_cols_width = width - time_col_width
         num_day_cols = 7
         day_col_width = day_cols_width / num_day_cols
         num_rows = 38
         row_height = height / num_rows
         
-        c.setFont(FONT_HEADER, 9)
+        c.setFont(FONT_HEADER, 12)
         header_y = y + height + 0.1*inch
         headers = ["Time", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         
@@ -303,7 +303,7 @@ class WeeklyPage(PlannerPage):
             line_x = x + time_col_width + i * day_col_width
             c.line(line_x, y, line_x, y + height)
         
-        c.setFont(FONT_SMALL, 7)
+        c.setFont(FONT_SMALL, 8)
         c.drawString(x + 0.02*inch, y + height - 0.5*row_height - 0.05*inch, "00:00-05:00")
         
         for i in range(37):
@@ -390,11 +390,11 @@ class DailySchedulePage(PlannerPage):
         
         c.setFillColor(COLOR_TEXT)
         c.drawString(current_x, y, day_str)
-        current_x += c.stringWidth(day_str, FONT_HEADER, 14)
+        current_x += c.stringWidth(day_str, FONT_HEADER, 16)
         
         c.setFillColor(COLOR_LINK)
         c.drawString(current_x, y, month_name)
-        month_width = c.stringWidth(month_name, FONT_HEADER, 14)
+        month_width = c.stringWidth(month_name, FONT_HEADER, 16)
         self.add_link(current_x, y - 0.05*inch, current_x + month_width, y + 0.15*inch,
                      f'month_{self.date_obj.year}_{self.date_obj.month:02d}')
         current_x += month_width

@@ -273,9 +273,9 @@ class RemarkableSync:
 
 def main():
     import argparse
-    
+
     parser = argparse.ArgumentParser(description='Sync PDFs to reMarkable tablet')
-    parser.add_argument('path', help='PDF file or directory to upload')
+    parser.add_argument('--path', help='PDF file or directory to upload')
     parser.add_argument('--folder', help='reMarkable folder name (e.g., "2026")')
     parser.add_argument('--host', help='reMarkable IP (reads from REMARKABLE_HOST env var if not provided)')
     parser.add_argument('--password', help='SSH password (reads from REMARKABLE_PASSWORD env var if not provided)')
@@ -285,7 +285,7 @@ def main():
                        help='Exit with error if sync fails (default: log and continue)')
     
     args = parser.parse_args()
-    
+    print(args.path)
     host = args.host or os.getenv('REMARKABLE_HOST')
     password = args.password or os.getenv('REMARKABLE_PASSWORD')
     
