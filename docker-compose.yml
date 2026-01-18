@@ -8,15 +8,13 @@ services:
     container_name: remarkable-calendar
     network_mode: host
     environment:
-      - GOOGLE_CREDENTIALS_FILE=${GOOGLE_CREDENTIALS_FILE}
+      - GOOGLE_CREDENTIALS_FILE=${GOOGLE_CREDENTIALS_FILE:-credentials.json}
       - TODOIST_API_TOKEN=${TODOIST_API_TOKEN}
       - REMARKABLE_HOST=${REMARKABLE_HOST}
       - REMARKABLE_PASSWORD=${REMARKABLE_PASSWORD}
     volumes:
       - planner_2026:/app/planner_2026
       - planner_2027:/app/planner_2027
-      - ./configuration/credentials.json:/app/credentials.json:ro
-      - ./configuration/token.json:/app/token.json
     command: ["2026"]
 
 volumes:
