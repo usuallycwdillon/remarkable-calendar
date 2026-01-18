@@ -1,13 +1,13 @@
 # env, etc
 __pycache__/
 .venv/
+docker-compose-override.yml
 
 # outputs
 planner_*/
 *.pdf
 
 # secrets
-configuration/
-credentials.json
-token.json 
-.env
+configuration/credentials.json
+configuration/token.json 
+configuration/.env
