@@ -7,8 +7,11 @@ services:
     pull_policy: build
     container_name: remarkable-calendar
     network_mode: host
-    env_file:
-      - .env
+    environment:
+      - GOOGLE_CREDENTIALS_FILE=${GOOGLE_CREDENTIALS_FILE}
+      - TODOIST_API_TOKEN=${TODOIST_API_TOKEN}
+      - REMARKABLE_HOST=${REMARKABLE_HOST}
+      - REMARKABLE_PASSWORD=${REMARKABLE_PASSWORD}
     volumes:
       - ./planner_2026:/app/planner_2026
       - ./planner_2027:/app/planner_2027
