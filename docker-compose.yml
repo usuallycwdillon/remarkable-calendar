@@ -13,8 +13,10 @@ services:
       - REMARKABLE_HOST=${REMARKABLE_HOST}
       - REMARKABLE_PASSWORD=${REMARKABLE_PASSWORD}
     volumes:
-      - ./planner_2026:/app/planner_2026
-      - ./planner_2027:/app/planner_2027
-      - ./credentials.json:/app/credentials.json:ro
-      - ./token.json:/app/token.json
+      - planner_2026:/app/planner_2026
+      - planner_2027:/app/planner_2027
     command: ["2026"]
+
+volumes:
+  planner_2026:
+  planner_2027:
