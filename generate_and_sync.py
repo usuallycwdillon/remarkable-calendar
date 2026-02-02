@@ -17,7 +17,7 @@ def main():
     if password and host:
         print(f"\nSyncing to reMarkable at {host}...")
         sync = RemarkableSync(host=host, password=password)
-        success = sync.upload_directory(f"{year}_planner", fail_on_error=False)
+        success = sync.upload_directory(f"{year}_Planner", fail_on_error=False)
         
         if success:
             print(f"✓ Sync complete!")

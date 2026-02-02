@@ -11,3 +11,7 @@ planner_*/
 configuration/credentials.json
 configuration/token.json 
 configuration/.env
+.env
+token.json
+credentials.json
+
